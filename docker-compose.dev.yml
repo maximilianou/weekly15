@@ -1,0 +1,54 @@
+version: "3.8" # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  cook15_angular: # name of the first service
+    build: # specify the directory of the Dockerfile
+      context: ./front_angular
+      dockerfile: Dockerfile.dev
+    container_name: cook15_angular
+    volumes:
+      - ./front_angular:/front_angular
+      - /front_angular/node_modules
+    ports:
+      - "4200:4200" # specify port forewarding
+      - "49153:49153"
+    environment:
+      - NODE_ENV=dev
+
+  cook15_express: #name of the second service
+    build: # specify the directory of the Dockerfile
+      context: ./api_express
+      dockerfile: Dockerfile.dev
+    container_name: cook15_express
+    volumes:
+      - ./api_express:/api_express
+      - /api_express/node_modules
+    ports:
+      - "5000:5000" #specify ports forewarding
+    environment:
+      - PORT=5000
+    links:
+      - cook15_database
+
+  cook15_database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+
+  cook15_adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8040:8080
+
+  cook15_nginx: #name of the fourth service
+    build: loadbalancer # specify the directory of the Dockerfile
+    container_name: cook15_nginx
+    ports:
+      - "8015:80" #specify ports forewarding
+    links:
+      - cook15_express
+      - cook15_angular
+
