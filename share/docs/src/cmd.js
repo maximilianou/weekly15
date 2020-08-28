@@ -110,6 +110,22 @@ const filesIn = [
     path: '../../../front_angular/src/app/auth/login/login.component.html',
     mark: '\n```\n',
   },
+  {
+    path: '../../../api_ts/lib/server.ts',
+    mark: '\n```\n',
+  },
+  {
+    path: '../../../api_ts/lib/environment.ts',
+    mark: '\n```\n',
+  },
+  {
+    path: '../../../api_ts/lib/config/app.ts',
+    mark: '\n```\n',
+  },
+  {
+    path: '../../../api_ts/lib/routes/routes_test.ts',
+    mark: '\n```\n',
+  },
 ];
 const publish = (cmd) => {
   remove({ fileOut: cmd.fileOut });

@@ -1,3 +1,7 @@
+### ../../../DO.md 
+# weekly15
+javascript, typescript, angular, docker, docker-compose, express, jwt, postgresql, openapi
+
 ### ../../../Makefile 
 ```
 ng3:
@@ -51,10 +55,6 @@ ng9:
 
 
 ```
-### ../../../DO.md 
-# weekly15
-javascript, typescript, angular, docker, docker-compose, express, jwt, postgresql, openapi
-
 ### ../../../docker-compose.dev.yml 
 ```
 version: "3.8" # specify docker-compose version
@@ -636,6 +636,12 @@ export class HomeComponent implements OnInit {
 }
 
 ```
+### ../../../front_angular/src/app/home/home.component.css 
+```
+.marge{
+    margin-top: 1%;
+}
+```
 ### ../../../front_angular/src/app/home/home.component.html 
 ```
 <div *ngIf="notify" class="alert alert-success container marge">
@@ -643,12 +649,6 @@ export class HomeComponent implements OnInit {
 </div>
 <p>home works!</p>
 
-```
-### ../../../front_angular/src/app/home/home.component.css 
-```
-.marge{
-    margin-top: 1%;
-}
 ```
 ### ../../../front_angular/src/app/header/header.component.ts 
 ```
@@ -1149,4 +1149,94 @@ export class LoginComponent implements OnInit {
         </div>
     </div>
 </div>
+```
+### ../../../api_ts/lib/server.ts 
+```
+import app from './config/app';
+import env from './environment';
+
+const PORT = env.getPort();
+
+app.listen(PORT, () => {
+    console.log(`Express server Typescript!!; listening: ${PORT}`);
+});
+```
+### ../../../api_ts/lib/environment.ts 
+```
+enum Environments {
+    local_environment = 'local',
+    dev_environment = 'dev',
+    prod_environment = 'prod',
+    qa_environment = 'qa'
+}
+
+class Environment {
+    private environment: string;
+    constructor(environment:string){
+        this.environment = environment;
+    }
+    getPort() : Number {
+        if( this.environment === Environments.prod_environment){
+            return 8081;
+        }else if( this.environment === Environments.dev_environment){
+            return 8082;
+        }else if( this.environment === Environments.qa_environment){
+            return 8083;
+        }else{
+            return 3000;
+        }
+    }
+    getDBName() : string {
+        if( this.environment === Environments.prod_environment){
+            return 'db_test_ts_prod';
+        }else if( this.environment === Environments.dev_environment){
+            return 'db_test_ts_dev';
+        }else if( this.environment === Environments.qa_environment){
+            return 'db_test_ts_qa';
+        }else{
+            return 'db_test_ts_local';
+        }
+
+    }
+}
+
+export default new Environment(Environments.local_environment);
+```
+### ../../../api_ts/lib/config/app.ts 
+```
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import { RoutesTest } from '../routes/routes_test';
+
+class App {
+    public app: express.Application;
+    private routes_test: RoutesTest = new RoutesTest();
+    constructor(){
+        this.app = express();
+        this.config();
+        this.routes_test.route(this.app);
+    }
+    private config(){
+        this.app.use( bodyParser.json() );
+        this.app.use( bodyParser.urlencoded({ extended: false}) );
+    }
+}
+export default new App().app;
+```
+### ../../../api_ts/lib/routes/routes_test.ts 
+```
+// lib/routes/routes.test.ts
+import { Application, Request, Response} from 'express';
+
+export class RoutesTest{
+    public route(app: Application){
+        app.get('/api_ts/test', (req: Request, res: Response) => {
+            res.status(200).json({message: 'Get request successfull'});
+        });
+        app.post('/api_ts/test', (req: Request, res: Response) => {
+            res.status(200).json({message: 'Post request successfull'});
+        });
+
+    }
+}
 ```
