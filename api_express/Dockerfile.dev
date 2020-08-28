@@ -3,7 +3,7 @@ FROM node:14-alpine
 # disabling ssl for npm for Dev or if you are behind proxy
 RUN npm set strict-ssl false
 # Change directory so that our commands run inside this new directory
-WORKDIR /api
+WORKDIR /api_express
 # Copy dependency definitions
 COPY package.json ./
 ## installing node modules

@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 // };
 // app.use(cors(corsOptions));
 app.use(cors());
-app.use('/api/users', userRoute);
+app.use('/api_express/users', userRoute);
 
 const PORT = process.env.PORT || 5000;
 

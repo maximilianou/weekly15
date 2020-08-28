@@ -18,32 +18,32 @@ ng1:
 	nvm use 14
 	npm install -g npm@latest
 	npm install -g @angular/cli
-	ng new frontend
+	ng new front_angular
 ng2: 
-	cd frontend && ng serve
+	cd front_angular && ng serve
 ng6:
-	mkdir api
-	cd api && npm init -y
-	cd api && npm install nodemon --save-dev
-	cd api && npm install bcryptjs body-parser cors express jsonwebtoken mongoose validator --save	
+	mkdir api_express
+	cd api_express && npm init -y
+	cd api_express && npm install nodemon --save-dev
+	cd api_express && npm install bcryptjs body-parser cors express jsonwebtoken mongoose validator --save	
 ng8:
-	#cd frontend && ng generate module app-routing --flat --module=app
-	cd frontend && ng generate component home
-	cd frontend && ng generate component header
-	cd frontend && ng generate component profile
-	cd frontend && ng generate component auth
-	cd frontend && ng generate module auth
-	cd frontend && ng generate service auth/auth
-	cd frontend && ng generate guard auth/auth
-	cd frontend && ng generate component auth/register
-	cd frontend && ng generate component auth/login
-	cd frontend && npm install bootstrap --save
-	cd frontend && npm install @auth0/angular-jwt --save
-	cd frontend && npm install moment --save
+	#cd front_angular && ng generate module app-routing --flat --module=app
+	cd front_angular && ng generate component home
+	cd front_angular && ng generate component header
+	cd front_angular && ng generate component profile
+	cd front_angular && ng generate component auth
+	cd front_angular && ng generate module auth
+	cd front_angular && ng generate service auth/auth
+	cd front_angular && ng generate guard auth/auth
+	cd front_angular && ng generate component auth/register
+	cd front_angular && ng generate component auth/login
+	cd front_angular && npm install bootstrap --save
+	cd front_angular && npm install @auth0/angular-jwt --save
+	cd front_angular && npm install moment --save
 
 ng9:
-	#cd frontend && npm install angular-in-memory-web-api --save
-	#cd frontend && ng generate service InMemoryData
-	#cd frontend && ng generate component dish-search
+	#cd front_angular && npm install angular-in-memory-web-api --save
+	#cd front_angular && ng generate service InMemoryData
+	#cd front_angular && ng generate component dish-search
 
 
